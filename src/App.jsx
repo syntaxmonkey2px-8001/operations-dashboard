@@ -1,19 +1,18 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import '@/styles/app.scss';
-// import '@/App.css'
 import Header from '@/components/Header.jsx';
 import Sidebar from '@/components/Sidebar.jsx';
 import TaskTable from '@/components/TaskTable.jsx'
 
 function App() {
-  // const [count, setCount] = useState(0)
+      const [activeFilter, setActiveFilter] = useState('All');
 
   return (
     <>
       <div className="dashboard">
         <Header />
-        <Sidebar />
-        <TaskTable />
+        <Sidebar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+        <TaskTable activeFilter={activeFilter}/>
       </div>
     </>
   )

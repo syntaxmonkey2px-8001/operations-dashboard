@@ -1,36 +1,11 @@
-/* Color Palette: */
-$background: #f5f5f5;
-$background-accent: #ffffff;
-$Card-bg: #ffffff;
-$text-primary: #1a1a1a;
-$text-secondary: #666666;
-$border: #e0e0e0;
-/* (buttons/active) */
-$accent: #0066cc;
-$accent-hover: #0052a3;
+@use '_mixins';
+@use'_variables';
 
 
-$padding-default: 1.7rem;
-$padding-table: .75rem 1rem;
+html{
+            background-color: variables.$background;
 
-/* (use multiples: 8px, 16px, 24px, 32px) */
-
-
-@mixin base-style ($background) {
-    background-color: $background;
-    color: $text-primary;
-
-    /* Typography: */
-
-
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
 }
-
-// html{
-//     font-size: 16px;
-// }
 
 .dashboard {
     max-width: 1400px;
@@ -39,7 +14,6 @@ $padding-table: .75rem 1rem;
     display: grid;
     grid-template-areas: ' header header header'
         'aside main main ';
-
 }
 
 h1 {
@@ -53,12 +27,12 @@ h4 {
 }
 
 header {
-    @include base-style($background-accent);
+    @include mixins.base-style(variables.$background-accent);
     grid-area: header;
 
     height: 4em;
     border-bottom: 1px solid #e0e0e0;
-    padding: 0 $padding-default;
+    padding: 0 variables.$padding-default;
 
     /* Centered-title: "Operations Dashboard" */
 
@@ -68,13 +42,12 @@ header {
 }
 
 aside {
-    @include base-style($background-accent);
+    @include mixins.base-style(variables.$background-accent);
 
     grid-area: aside;
     width: 240px;
     text-align: left;
-    // border-right: 1px solid #e0e0e0;
-    padding: $padding-default 0;
+    padding: variables.$padding-default 0;
 
 
     .button-wrapper {
@@ -97,112 +70,29 @@ aside {
 
             //active - later to be removed when react is added
             // &:active {
-            //     color: $accent;
+            //     color: variables.$accent;
             //     border-left: 4px solid $accent;
 
 
             .active {
-                color: $accent;
-                border-left: 4px solid $accent;
+                color: variables.$accent;
+                border-left: 4px solid variables.$accent;
             }
 
 
 
             &:hover {
-                background: $background;
+                background: variables.$background;
                 border: none;
-                border-left: 4px solid $accent;
+                border-left: 4px solid variables.$accent;
             }
         }
     }
 }
 
-/* Status badges */
-$badge-in-progress-bg: #e3f2fd;
-$badge-in-progress-text: #0052a3;
-$badge-todo-bg: #f3e5f5;
-$badge-todo-text: #6a1b9a;
-$badge-done-bg: #e8f5e9;
-$badge-done-text: #1b5e20;
-$badge-blocked-bg: #ffebee;
-$badge-blocked-text: #c62828;
-
-/* Priority badges */
-$badge-high-bg: #ffebee;
-$badge-high-text: #c62828;
-$badge-medium-bg: #fff3e0;
-$badge-medium-text: #e65100;
-$badge-low-bg: #e8f5e9;
-$badge-low-text: #1b5e20;
-
-@mixin badge-style($background, $text-color) {
-    background-color: $background;
-    color: $text-color;
-    display: inline-block;
-    padding: 4px 12px;
-    width: 80%;
-}
-
-main {
-    @include base-style($background);
-    // Padding: 24px
-
-    grid-area: main;
-    padding: $padding-default;
 
 
-    table {
 
-        th {
-            font-weight: 500;
-            border-bottom: 2px;
-        }
-
-        tr {
-            padding: $padding-table;
-
-            &:hover {
-                background-color: $background;
-            }
-
-
-            .status-inProgress {
-                @include badge-style($badge-in-progress-bg, $badge-in-progress-text)
-            }
-
-            .status-todo {
-                @include badge-style($badge-todo-bg, $badge-todo-text)
-            }
-
-            .status-done {
-                @include badge-style($badge-done-bg, $badge-done-text)
-            }
-
-            .status-blocked {
-                @include badge-style($badge-blocked-bg, $badge-blocked-text)
-            }
-
-            .priority-high {
-                @include badge-style($badge-high-bg, $badge-high-text)
-            }
-
-            .priority-low {
-                @include badge-style($badge-low-bg, $badge-low-text)
-            }
-
-            .priority-medium {
-                @include badge-style($badge-medium-bg, $badge-medium-text)
-            }
-
-            td {
-                padding: 2px 10px;
-
-            }
-
-        }
-
-    }
-}
 
 /* 
 Layout:
@@ -216,35 +106,34 @@ Desktop: 1024px+
 Tablet: 768px–1023px
 Mobile: < 768px */
 
-@media(max-width:1023px) {
-    //     .dashboard {
+@media(min-width:769px) and (max-width:1023px) {
+    .dashboard {
 
-    //         grid-template-areas: ' header'
-    //             'aside'
-    //             'main ';
+        grid-template-areas: ' header'
+            'aside'
+            'main ';
 
-    //         aside {
-    //             width: 100dvw;
+        aside {
+            width: auto;
+            padding: variables.$padding-default;
 
-    //             .button-wrapper {
-    //                 width: auto;
-    //                 flex-wrap: no-wrap;
-    //                 flex-direction: row;
-    //                 justify-content: space-around;
+            .button-wrapper {
+                width:auto;
+                padding: variables.$padding-none ;
+                margin-inline: variables.$padding-default;
+                flex-wrap: no-wrap;
+                flex-direction: row;
+                justify-content: space-around;
 
-    //                 button {
-    //                     width: 20%;
-    //                 }
-    //             }
-    //         }
+                button {
+                    width: 20%;
+                }
+            }
+        }
+    }
+}
 
-    //         main {
-    //             font-size: smaller;
-    //         }
-    //     }
-    // }
-
-    // @media(max-width:768px) {
+@media(max-width:768px) {
     .dashboard {
         grid-template-areas: 'header'
             'aside'
@@ -257,10 +146,10 @@ Mobile: < 768px */
             }
         }
 
-        main {
-            min-width: 587px;
-            font-size: smaller;
-        }
+        // main {
+        //     min-width: 587px;
+        //     font-size: smaller;
+        // }
 
         aside {
             width: 100dvw;
@@ -270,7 +159,7 @@ Mobile: < 768px */
                 flex-wrap: no-wrap;
                 flex-direction: row;
                 justify-content: space-around;
-                padding: $padding-default;
+                padding: variables.$padding-default;
 
 
                 button {
@@ -281,7 +170,7 @@ Mobile: < 768px */
 
                     &:hover {
                         border-left: none;
-                        border-top: 4px solid $accent;
+                        border-top: 4px solid variables.$accent;
                     }
 
                 }

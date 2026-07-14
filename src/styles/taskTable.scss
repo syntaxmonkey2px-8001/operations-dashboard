@@ -1,0 +1,126 @@
+@use '_mixins';
+@use'_variables';
+
+/* Status badges */
+$badge-in-progress-bg: #e3f2fd;
+$badge-in-progress-text: #0052a3;
+$badge-todo-bg: #f3e5f5;
+$badge-todo-text: #6a1b9a;
+$badge-done-bg: #e8f5e9;
+$badge-done-text: #1b5e20;
+$badge-blocked-bg: #ffebee;
+$badge-blocked-text: #c62828;
+
+/* Priority badges */
+$badge-high-bg: #ffebee;
+$badge-high-text: #c62828;
+$badge-medium-bg: #fff3e0;
+$badge-medium-text: #e65100;
+$badge-low-bg: #e8f5e9;
+$badge-low-text: #1b5e20;
+
+$border-strong: #b0b0b0;
+
+@mixin badge-style($background, $text-color) {
+    background-color: $background;
+    color: $text-color;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    box-shadow: .3px .3px .3px .3px lightgray;
+    width: 80%;
+
+    @media(max-width:768px) {
+        font-size: 11px;
+    }
+}
+
+main {
+    @include mixins.base-style(variables.$background);
+    grid-area: main;
+    padding: variables.$padding-default;
+
+    table {
+        margin-inline: auto;
+        border-spacing: 13px 2px;
+        font-size: 13px;
+
+
+        .hidden {
+            display: none;
+        }
+
+        .show {
+            display: flexbox;
+
+        }
+
+        th {
+            font-weight: 500;
+            border-bottom: 2px solid $border-strong; // Spec: #b0b0b0 (border-strong)
+            padding: 12px 16px;
+        }
+
+        tbody {
+            tr {
+                // padding: variables.$padding-table;
+
+                &:hover {
+                    background-color: variables.$background;
+                }
+
+
+                .status-inProgress {
+                    @include badge-style($badge-in-progress-bg, $badge-in-progress-text)
+                }
+
+                .status-todo {
+                    @include badge-style($badge-todo-bg, $badge-todo-text)
+                }
+
+                .status-done {
+                    @include badge-style($badge-done-bg, $badge-done-text)
+                }
+
+                .status-blocked {
+                    @include badge-style($badge-blocked-bg, $badge-blocked-text)
+                }
+
+                .priority-high {
+                    @include badge-style($badge-high-bg, $badge-high-text)
+                }
+
+                .priority-low {
+                    @include badge-style($badge-low-bg, $badge-low-text)
+                }
+
+                .priority-medium {
+                    @include badge-style($badge-medium-bg, $badge-medium-text)
+                }
+
+                td {
+                    padding: 2px 10px;
+                    width: auto%;
+
+                }
+
+            }
+        }
+
+    }
+}
+
+@media(max-width:768px) {
+
+    main {
+        min-width: 587px;
+        font-size: smaller;
+        // padding: variables.$padding-none;
+
+        table {
+            margin: 0;
+        }
+    }
+}

@@ -1,18 +1,15 @@
 import { useState } from "react";
 
-
-export default function Sidebar() {
-
-    const [activeFilter, setActiveFilter] = useState('All');
+export default function Sidebar({ activeFilter, setActiveFilter }) {
 
     // filter buttons
-    const filter = ['All', 'To-do', 'In Progress', 'Done', 'Blocked'];
+    const filters = ['All', 'To-Do', 'In Progress', 'Done', 'Blocked'];
 
     function handleButtonClick(filter){
-
-    setActiveFilter(filter)
+    setActiveFilter(filter);
 }
 
+console.log(activeFilter)
 
     return (
 
@@ -20,10 +17,10 @@ export default function Sidebar() {
             <h3>Filter</h3>
             <div className="button-wrapper">
 
-                {filter.map((filter) => (
+                {filters.map((filter) => (
                     <button
                         key={filter}
-                        onClick={()=>handleButtonClick({filter})}
+                        onClick={()=>handleButtonClick(filter)}
                         className={activeFilter == filter ? 'active' : ''}>
                         {filter}
 
