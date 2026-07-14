@@ -21,19 +21,27 @@ $badge-low-text: #1b5e20;
 
 $border-strong: #b0b0b0;
 
+$table-fs-default: 13px;
+$table-fs-s: 11px;
+
+$font-weight-strong: 500;
+
+$badge-padding: 4px 12px;
+
+
 @mixin badge-style($background, $text-color) {
     background-color: $background;
     color: $text-color;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: $table-fs-default;
+    font-weight: $font-weight-strong;
     display: inline-block;
-    padding: 4px 12px;
+    padding: $badge-padding;
     border-radius: 4px;
     box-shadow: .3px .3px .3px .3px lightgray;
     width: 80%;
 
     @media(max-width:768px) {
-        font-size: 11px;
+        font-size: $table-fs-s;
     }
 }
 
@@ -43,10 +51,11 @@ main {
     padding: variables.$padding-default;
 
     table {
-        margin-inline: auto;
-        border-spacing: 13px 2px;
-        font-size: 13px;
+        margin-inline: 0;
+        width: 100%;
 
+        font-size: $table-fs-default;
+        border-collapse: collapse;
 
         .hidden {
             display: none;
@@ -58,17 +67,16 @@ main {
         }
 
         th {
-            font-weight: 500;
+            font-weight: $font-weight-strong;
             border-bottom: 2px solid $border-strong; // Spec: #b0b0b0 (border-strong)
             padding: 12px 16px;
         }
 
         tbody {
             tr {
-                // padding: variables.$padding-table;
 
                 &:hover {
-                    background-color: variables.$background;
+                    background-color: variables.$background-accent;
                 }
 
 
@@ -112,12 +120,19 @@ main {
     }
 }
 
+@media(min-width:769px) and (max-width:1023px) {
+    main {
+        table {
+            margin-inline: auto;
+        }
+    }
+}
+
 @media(max-width:768px) {
 
     main {
         min-width: 587px;
         font-size: smaller;
-        // padding: variables.$padding-none;
 
         table {
             margin: 0;

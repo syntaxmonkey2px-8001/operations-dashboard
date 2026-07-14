@@ -12,12 +12,13 @@ html{
     /*(dashboard doesn't need to go wider)*/
 
     display: grid;
-    grid-template-areas: ' header header header'
-        'aside main main ';
+    grid-template-areas: ' header header header header'
+        'aside main main main';
 }
 
 h1 {
     font-size: 1.25rem;
+    text-align: center;
 }
 
 h2,
@@ -47,15 +48,12 @@ aside {
     grid-area: aside;
     width: 240px;
     text-align: left;
-    padding: variables.$padding-default 0;
-
+    padding: variables.$padding-default;
 
     .button-wrapper {
         display: flex;
         flex-direction: column;
         gap: .2em;
-
-
 
         button {
             color: #666666;
@@ -77,6 +75,7 @@ aside {
             .active {
                 color: variables.$accent;
                 border-left: 4px solid variables.$accent;
+
             }
 
 
