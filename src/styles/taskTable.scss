@@ -70,6 +70,18 @@ main {
             font-weight: $font-weight-strong;
             border-bottom: 2px solid $border-strong; // Spec: #b0b0b0 (border-strong)
             padding: 12px 16px;
+            cursor: variables.$cursor-pointer;
+
+            button {
+                @include badge-style(variables.$background-accent, variables.$text-primary);
+                // border-radius: 7px;
+                font-size: smaller;
+                width: 30%;
+                margin-left: 1em;
+                border: none;
+                padding: 2px;
+            }
+
         }
 
         tbody {

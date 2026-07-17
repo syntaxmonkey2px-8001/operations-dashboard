@@ -5,6 +5,29 @@ import '@/styles/taskTable.scss'
 
 export default function TaskTable({ activeFilter }) {
 
+    const [taskOrder, setTaskOrder] = useState(tasks);
+    const [sortDirection, setSortDirection] = useState('');
+    const [sortButtonText, setSortButtonText] = useState('A-Z')
+
+    function sortAssignee() {
+
+        const alphabeticalAscending = [...taskOrder].sort((a, b) => a.assignee.localeCompare(b.assignee));
+        const alphabeticalDescending = [...taskOrder].sort((a, b) => b.assignee.localeCompare(a.assignee));
+
+        if (sortDirection !== 'ascending') {
+            setTaskOrder(alphabeticalAscending);
+            setSortDirection('ascending')
+            setSortButtonText('Z-A')
+        } else {
+            setTaskOrder(alphabeticalDescending);
+            setSortDirection('descending');
+            setSortButtonText('A-Z')
+
+        }
+
+        console.log(sortDirection)
+    }
+
     const header = ['Title', 'Assignee', 'Status', 'Due Date', 'Priority']
 
     const priorityClass = {
@@ -29,25 +52,32 @@ export default function TaskTable({ activeFilter }) {
                         {header.map((header) =>
                             <th key={header}>
                                 {header}
+                                <button
+                                    className={header === 'Assignee' ? 'show' : 'hidden'}
+                                    onClick={sortAssignee}
+                                >
+                                    {sortButtonText}
+                                </button>
                             </th>
                         )}
                     </tr>
                 </thead>
-                    <tbody >
-                                        {tasks.map((task) =>
+                <tbody >
+                    {taskOrder.map((task) =>
 
-                        <tr key={task.id} className={ 
-                            activeFilter === 'All' || 
-                            task.status === activeFilter ? 'show' : 'hidden' }>
+                        <tr key={task.id} className={
+                            activeFilter === 'All' ||
+                                task.status === activeFilter ? 'show' : 'hidden'}
+                        >
                             <td> {task.title}</td>
                             <td> {task.assignee}</td>
                             <td className={statusClass[task.status]}> {task.status}</td>
                             <td> {task.dueDate}</td>
                             <td className={priorityClass[task.priority]}> {task.priority}</td>
                         </tr>
-                                        )}
+                    )}
 
-                    </tbody>
+                </tbody>
             </table>
         </main>
     )
